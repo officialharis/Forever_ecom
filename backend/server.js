@@ -10,29 +10,27 @@ import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 
 
-//App config
+
 const app = express();
 const port = process.env.PORT || 4000
 
-// Connect to services (non-blocking)
+
 connectDB().catch(err => {
     console.log("Failed to connect to MongoDB:", err.message);
 });
 connectCloudinary();
-//middlewares
+
 app.use(express.json());
 app.use(cors( { origin: [
         'http://localhost:5173',
         'http://localhost:5174',
-        'https://your-frontend-domain.vercel.app',
-        'https://your-admin-domain.vercel.app',
-        'https://your-frontend-domain.netlify.app',
-        'https://your-admin-domain.netlify.app'
+        'https://forever-ecom-frontend-sand.vercel.app/',
+        'https://forever-admin-three-jet.vercel.app/',
     ],
     credentials: true
 }));
 
-//api endpoint
+
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
