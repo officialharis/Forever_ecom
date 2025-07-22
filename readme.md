@@ -205,7 +205,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Your Name - your.email@example.com
 
-Project Link: [https://github.com/yourusername/forever-ecommerce](https://github.com/yourusername/forever-ecommerce)
+Project Link: https://forever-ecom-frontend-sand.vercel.app/
 
 ## 🙏 Acknowledgments
 
