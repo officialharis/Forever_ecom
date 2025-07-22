@@ -35,51 +35,51 @@ const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        console.log('📝 Registration attempt:', { name, email, password: '***' });
+        console.log('Registration attempt:', { name, email, password: '***' });
 
         //checking user already exists or not
-        console.log('🔍 Checking if user exists...');
+        console.log('Checking if user exists...');
         const exists = await userModel.findOne({ email });
 
         if (exists) {
-            console.log('❌ User already exists:', email);
+            console.log('User already exists:', email);
             return res.json({ success: false, message: "user already exists" })
         }
 
         //validating email format & strong password
         if (!validator.isEmail(email)) {
-            console.log('❌ Invalid email format:', email);
+            console.log('Invalid email format:', email);
             return res.json({ success: false, message: "please enter a valid email" })
         }
 
         if (password.length < 8) {
-            console.log('❌ Password too short');
+            console.log('Password too short');
             return res.json({ success: false, message: "please enter a strong password" })
         }
 
         //hashing user password
-        console.log('🔐 Hashing password...');
+        console.log('Hashing password...');
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        console.log('👤 Creating new user...');
+        console.log('Creating new user...');
         const newUser = new userModel({
             name,
             email,
             password: hashedPassword
         })
 
-        console.log('💾 Saving user to database...');
+        console.log('Saving user to database...');
         const user = await newUser.save()
-        console.log('✅ User saved successfully with ID:', user._id);
+        console.log('User saved successfully with ID:', user._id);
 
         const token = createToken(user._id)
-        console.log('🔑 Token created successfully');
+        console.log('Token created successfully');
 
         res.json({ success: true, token })
 
     } catch (error) {
-        console.error('❌ Registration error:', error);
+        console.error('Registration error:', error);
 
         if (error.name === 'MongooseError' || error.name === 'MongoError') {
             console.error('Database connection issue');
@@ -93,12 +93,12 @@ const registerUser = async (req, res) => {
 //route for admin login
 const adminLogin = async (req, res) => {
     try {
-        console.log('🔐 Admin login attempt:', req.body);
+        console.log('Admin login attempt:', req.body);
 
         const {email, password} = req.body
 
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            console.log('✅ Admin credentials valid');
+            console.log('Admin credentials valid');
 
             // Create token with proper payload
             const token = jwt.sign(
@@ -111,15 +111,15 @@ const adminLogin = async (req, res) => {
                 { expiresIn: '7d' }
             );
 
-            console.log('🔑 Admin token created successfully');
+            console.log('Admin token created successfully');
             res.json({success: true, token})
         } else {
-            console.log('❌ Invalid admin credentials');
+            console.log('Invalid admin credentials');
             res.json({success: false, message: "Invalid credentials"})
         }
 
     } catch (error) {
-        console.error('❌ Admin login error:', error);
+        console.error('Admin login error:', error);
         res.json({ success: false, message: error.message })
     }
 }

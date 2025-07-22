@@ -15,14 +15,13 @@ const connectDB = async () => {
     });
 
     await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-      socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+      serverSelectionTimeoutMS: 5000, 
+      socketTimeoutMS: 45000, 
     });
 
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);
     console.log("Server will continue running without database connection");
-    // Don't exit the process, let the server continue running
   }
 };
 

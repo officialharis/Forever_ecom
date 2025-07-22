@@ -5,7 +5,7 @@ const adminAuth = async (req,res,next) =>{
         const {token} = req.headers
 
         if (!token) {
-            console.log('❌ No admin token provided');
+            console.log(' No admin token provided');
             return res.json({success:false, message:"Not Authorized Login Again"});
         }
 
@@ -17,15 +17,15 @@ const adminAuth = async (req,res,next) =>{
             token_decode.password === process.env.ADMIN_PASSWORD &&
             token_decode.isAdmin === true) {
 
-            console.log('✅ Admin token verified successfully');
+            console.log('Admin token verified successfully');
             next();
         } else {
-            console.log('❌ Invalid admin token payload');
+            console.log('Invalid admin token payload');
             return res.json({success:false, message:"Not Authorized Login Again"});
         }
 
     } catch (error) {
-        console.error('❌ Admin auth error:', error.message);
+        console.error('Admin auth error:', error.message);
 
         if (error.name === 'JsonWebTokenError') {
             return res.json({ success: false, message: "Invalid token signature" });
