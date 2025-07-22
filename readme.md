@@ -203,7 +203,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-Your Name - your.email@example.com
+Your Name - h10dewangan@gmail.com
 
 Project Link: https://forever-ecom-frontend-sand.vercel.app/
 
